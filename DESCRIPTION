@@ -1,0 +1,16 @@
+Package: cladeCorrelation
+Title: Clade probabilities and correlations under uniform-on-topologies tree probability distributions;
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Luiz Max",
+           family = "Carvalho",
+           role = c("aut", "cre"),
+           email = "lmax.fgv@gmail.com",
+           comment = c(ORCID = "0000-0001-5736-5578"))
+Depends: R (>= 3.1.0), matrixStats, parallel, data.table           
+Description: This package implements functions to compute clade probabilities (marginal and joint) and correlations under a proportional to distinguishable arrangements.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
