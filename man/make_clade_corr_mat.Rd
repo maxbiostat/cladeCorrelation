@@ -2,19 +2,22 @@
 % Please edit documentation in R/matrix_building_functions.r
 \name{make_clade_corr_mat}
 \alias{make_clade_corr_mat}
-\title{Build the correlation matrix for (non-trivial) clades on \code{n} taxa.}
+\title{Build the correlation matrix for a list of K clades on \code{n} taxa.}
 \usage{
-make_clade_corr_mat(n)
+make_clade_corr_mat(Clades, n)
 }
 \arguments{
+\item{Clades}{a character vector with all clades to be included.}
+
 \item{n}{number of taxa.}
 }
 \value{
-a  2^n-n-2 x  2^n-n-2 correlation matrix.
+a  K x  K correlation matrix.
 }
 \description{
-Build the correlation matrix for (non-trivial) clades on \code{n} taxa.
+Build the correlation matrix for a list of K clades on \code{n} taxa.
 }
 \examples{
-make_clade_corr_mat(4)
+clades.n4 <- make_all_clades(4)
+make_clade_corr_mat(Clades = clades.n4, n = 4)
 }

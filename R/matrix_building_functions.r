@@ -23,9 +23,10 @@ make_all_clades <- function(n){
   return(ans)
 }
 
-#' Construct a grid of all (non-trivial) clades on \code{n} taxa. 
+#' Construct a grid of 'all vs all' correlations for a list of K clades on \code{n} taxa.
 #'
-#' @param n number of taxa
+#' @param Clades a character vector with all clades to be included.
+#' @param n number of taxa. 
 #' @param diagonal logical. If \code{TRUE} includes the diagonal entries,
 #'  which should all be 1 (default is \code{FALSE}).
 #' @param ncores number of cores to be used.
@@ -36,9 +37,9 @@ make_all_clades <- function(n){
 #' @export make_clade_corr_grid
 #'
 #' @examples
-#' make_clade_corr_grid(4)
-make_clade_corr_grid <- function(n, diagonal = FALSE, ncores = 2){
-  Clades <- make_all_clades(n)
+#' clades.n4 <- make_all_clades(4)
+#' make_clade_corr_grid(clades.n4, n = 4)
+make_clade_corr_grid <- function(Clades, n, diagonal = FALSE, ncores = 2){
   K <- length(Clades)
   if(diagonal){
     posGrid <- subset(expand.grid(Var1 = 1:K, Var2 = 1:K), Var1 <= Var2) 
@@ -53,36 +54,39 @@ make_clade_corr_grid <- function(n, diagonal = FALSE, ncores = 2){
   return(cbind(posGrid, data.table::rbindlist(Rho)))
 }
 
-#' Build the matrix of joint probabilities for (non-trivial) clades on \code{n} taxa.
+#' Build the matrix of joint probabilities for a list of K clades on \code{n} taxa.
+#' @param Clades a character vector with all K clades to be included.
+#' @param n number of taxa.
 #'
-#' @param n number of 
-#'
-#' @return a  2^n-n-2 x  2^n-n-2 matrix of joint probabilities.
+#' @return a  K x  K matrix of joint probabilities.
 #' @export make_clade_joint_mat
 #'
 #' @examples
-#' make_clade_joint_mat(4)
-make_clade_joint_mat <- function(n){
-  Grid <- make_clade_corr_grid(n = n)
-  K <- 2^n-n-2
+#' clades.n4 <- make_all_clades(4)
+#' make_clade_joint_mat(Clades = clades.n4, n = 4)
+make_clade_joint_mat <- function(Clades, n){
+  Grid <- make_clade_corr_grid(Clades = Clades, n = n)
+  K <- length(Clades)
   M <- matrix(0, ncol = K, nrow = K)
   for(k in 1:nrow(Grid)) M [Grid[k, ]$i, Grid[k, ]$j] <- Grid[k, ]$pij
   M <- M + t(M)
   return(M)
 }
 
-#' Build the variance-covariance matrix for (non-trivial) clades on \code{n} taxa.
-#'
+#' Build the variance-covariance matrix for a list of K clades on \code{n} taxa.
+#' 
+#' @param Clades a character vector with all K clades to be included.
 #' @param n number of taxa
 #'
-#' @return a  2^n-n-2 x  2^n-n-2 matrix of covariances.
+#' @return a K x K matrix of covariances.
 #' @export make_clade_cov_mat
 #'
 #' @examples
-#' make_clade_cov_mat(4)
-make_clade_cov_mat <- function(n){
-  Grid <- make_clade_corr_grid(n = n, diagonal = TRUE)
-  K <- 2^n-n-2
+#' clades.n4 <- make_all_clades(4)
+#' make_clade_cov_mat(Clades = clades.n4, n = 4)
+make_clade_cov_mat <- function(Clades, n){
+  Grid <- make_clade_corr_grid(Clades = Clades, n = n, diagonal = TRUE)
+  K <- length(Clades)
   M <- matrix(0, ncol = K, nrow = K)
   for(k in 1:nrow(Grid)) M [Grid[k, ]$i, Grid[k, ]$j] <- Grid[k, ]$cov
   Diag <- diag(M)
@@ -91,18 +95,20 @@ make_clade_cov_mat <- function(n){
   return(M)
 }
 
-#' Build the correlation matrix for (non-trivial) clades on \code{n} taxa.
+#' Build the correlation matrix for a list of K clades on \code{n} taxa.
 #'
+#' @param Clades a character vector with all clades to be included.
 #' @param n number of taxa.
 #'
-#' @return a  2^n-n-2 x  2^n-n-2 correlation matrix.
+#' @return a  K x  K correlation matrix.
 #' @export  make_clade_corr_mat
 #'
 #' @examples
-#' make_clade_corr_mat(4)
-make_clade_corr_mat <- function(n){
-  Grid <- make_clade_corr_grid(n = n)
-  K <- 2^n-n-2
+#' clades.n4 <- make_all_clades(4)
+#' make_clade_corr_mat(Clades = clades.n4, n = 4)
+make_clade_corr_mat <- function(Clades, n){
+  Grid <- make_clade_corr_grid(Clades = Clades, n = n)
+  K <- length(Clades)
   M <- matrix(0, ncol = K, nrow = K)
   for(k in 1:nrow(Grid)) M [Grid[k, ]$i, Grid[k, ]$j] <- Grid[k, ]$rho
   M <- M + t(M)

@@ -2,12 +2,14 @@
 % Please edit documentation in R/matrix_building_functions.r
 \name{make_clade_corr_grid}
 \alias{make_clade_corr_grid}
-\title{Construct a grid of all (non-trivial) clades on \code{n} taxa.}
+\title{Construct a grid of 'all vs all' correlations for a list of K clades on \code{n} taxa.}
 \usage{
-make_clade_corr_grid(n, diagonal = FALSE, ncores = 2)
+make_clade_corr_grid(Clades, n, diagonal = FALSE, ncores = 2)
 }
 \arguments{
-\item{n}{number of taxa}
+\item{Clades}{a character vector with all clades to be included.}
+
+\item{n}{number of taxa.}
 
 \item{diagonal}{logical. If \code{TRUE} includes the diagonal entries,
 which should all be 1 (default is \code{FALSE}).}
@@ -18,8 +20,9 @@ which should all be 1 (default is \code{FALSE}).}
 a grid of correlations between all clades.
 }
 \description{
-Construct a grid of all (non-trivial) clades on \code{n} taxa.
+Construct a grid of 'all vs all' correlations for a list of K clades on \code{n} taxa.
 }
 \examples{
-make_clade_corr_grid(4)
+clades.n4 <- make_all_clades(4)
+make_clade_corr_grid(clades.n4, n = 4)
 }
