@@ -24,7 +24,7 @@ Proportion of clades which are pairwise compatible.
 prop_compat(5)
 prop_compat(50)
 prop_compat(500)
-ns <- round(seq(4, 1E3, length.out = 200))
-plot(ns, prop_compat(ns), lwd = 3, xlab = expression(n),
-ylab = expression(p[c](n)), main = "Proportion compatible", type = "l", cex.lab = 1.5)
+ns <- 4:100
+plot(ns, prop_compat(ns), lwd = 3, xlab = "Number of taxa (n)",
+ylab = expression(c(n)), main = "Proportion compatible", type = "l", cex.lab = 1.5)
 }
