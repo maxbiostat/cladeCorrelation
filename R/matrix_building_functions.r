@@ -40,6 +40,8 @@ make_all_clades <- function(n){
 #' clades.n4 <- make_all_clades(4)
 #' make_clade_corr_grid(clades.n4, n = 4)
 make_clade_corr_grid <- function(Clades, n, diagonal = FALSE, ncores = 2){
+  Clades <- gsub(" ", "", Clades) # avoid complications by removing spaces
+  Var1 <- Var2 <- NULL
   K <- length(Clades)
   if(diagonal){
     posGrid <- subset(expand.grid(Var1 = 1:K, Var2 = 1:K), Var1 <= Var2) 
