@@ -71,10 +71,15 @@ rrn <- function(a, b, n, log = FALSE){
 #' @examples
 #' pclades(a = 2,  b = 3, n = 5,  case = 2)
 #' @details case 1: A == B; 
+#' 
 #' case 2: A is contained in B;
+#' 
 #' case 3: B is contained in A;
+#' 
 #' case 4: A and B are disjoint and a + b = n;
+#' 
 #' case 5: A and B are disjoint and a + b < n;
+#' 
 #' case 6: A and B are incompatible.
 pclades <- function(a, b, n, case = 1, log = FALSE){
   ans <- switch (case,

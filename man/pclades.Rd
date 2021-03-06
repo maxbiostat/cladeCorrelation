@@ -25,10 +25,15 @@ Joint probability of two clades
 }
 \details{
 case 1: A == B;
+
 case 2: A is contained in B;
+
 case 3: B is contained in A;
+
 case 4: A and B are disjoint and a + b = n;
+
 case 5: A and B are disjoint and a + b < n;
+
 case 6: A and B are incompatible.
 }
 \examples{
