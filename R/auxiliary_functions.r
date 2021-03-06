@@ -58,6 +58,8 @@ get_clade_elements <- Vectorize(get_clade_elements)
 #' compatible(x = "{t1,t2}", y = "{t1,t3,t4}")
 #' compatible(x = "{t1,t2}", y = "{t1,t2,t4}")
 compatible <- function(x, y){
+  x <- gsub(" ", "", x)
+  y <- gsub(" ", "", y)
   x.el <- get_clade_elements(x)
   y.el <- get_clade_elements(y)
   sx <- length(x.el)
