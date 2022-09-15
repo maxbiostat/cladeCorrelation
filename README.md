@@ -3,5 +3,5 @@ Code for calculating clade correlations based on the work of [Zhu, Degnan &amp; 
 
 Install with:
 ```r
-remotes::install_github("/maxbiostat/cladeCorrelation")
+remotes::install_github("maxbiostat/cladeCorrelation")
 ```
