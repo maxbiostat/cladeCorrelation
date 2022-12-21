@@ -70,8 +70,10 @@ make_clade_joint_mat <- function(Clades, n){
   Grid <- make_clade_corr_grid(Clades = Clades, n = n, diagonal = TRUE)
   K <- length(Clades)
   M <- matrix(0, ncol = K, nrow = K)
-  for(k in 1:nrow(Grid)) M [Grid[k, ]$i, Grid[k, ]$j] <- Grid[k, ]$pij
-  M <- M + t(M)
+  for (k in 1:nrow(Grid)){
+    M[Grid[k, ]$i, Grid[k, ]$j] <- Grid[k, ]$pij
+    M[Grid[k, ]$j, Grid[k, ]$i] <- Grid[k, ]$pij
+  } 
   return(M)
 }
 
