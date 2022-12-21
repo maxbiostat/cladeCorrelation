@@ -92,10 +92,10 @@ make_clade_cov_mat <- function(Clades, n){
   Grid <- make_clade_corr_grid(Clades = Clades, n = n, diagonal = TRUE)
   K <- length(Clades)
   M <- matrix(0, ncol = K, nrow = K)
-  for(k in 1:nrow(Grid)) M [Grid[k, ]$i, Grid[k, ]$j] <- Grid[k, ]$cov
-  Diag <- diag(M)
-  M <- M + t(M)
-  diag(M) <- Diag
+  for(k in 1:nrow(Grid)){
+    M [Grid[k, ]$i, Grid[k, ]$j] <- Grid[k, ]$cov
+    M [Grid[k, ]$j, Grid[k, ]$i] <- Grid[k, ]$cov
+  } 
   return(M)
 }
 
