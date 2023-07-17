@@ -57,8 +57,10 @@ make_clade_corr_grid <- function(Clades, n, diagonal = FALSE, ncores = 2){
 }
 
 #' Build the matrix of joint probabilities for a list of K clades on \code{n} taxa.
+#'
 #' @param Clades a character vector with all K clades to be included.
 #' @param n number of taxa.
+#' @param ncores number of cores to be used.
 #'
 #' @return a  K x  K matrix of joint probabilities.
 #' @export make_clade_joint_mat
@@ -66,8 +68,11 @@ make_clade_corr_grid <- function(Clades, n, diagonal = FALSE, ncores = 2){
 #' @examples
 #' clades.n4 <- make_all_clades(4)
 #' make_clade_joint_mat(Clades = clades.n4, n = 4)
-make_clade_joint_mat <- function(Clades, n){
-  Grid <- make_clade_corr_grid(Clades = Clades, n = n, diagonal = TRUE)
+make_clade_joint_mat <- function(Clades, n, ncores = 2){
+  Grid <- make_clade_corr_grid(Clades = Clades,
+                               n = n,
+                               diagonal = TRUE,
+                               ncores = ncores)
   K <- length(Clades)
   M <- matrix(0, ncol = K, nrow = K)
   for (k in 1:nrow(Grid)){
@@ -81,6 +86,7 @@ make_clade_joint_mat <- function(Clades, n){
 #' 
 #' @param Clades a character vector with all K clades to be included.
 #' @param n number of taxa
+#' @param ncores number of cores to be used.
 #'
 #' @return a K x K matrix of covariances.
 #' @export make_clade_cov_mat
@@ -88,8 +94,11 @@ make_clade_joint_mat <- function(Clades, n){
 #' @examples
 #' clades.n4 <- make_all_clades(4)
 #' make_clade_cov_mat(Clades = clades.n4, n = 4)
-make_clade_cov_mat <- function(Clades, n){
-  Grid <- make_clade_corr_grid(Clades = Clades, n = n, diagonal = TRUE)
+make_clade_cov_mat <- function(Clades, n, ncores = 2){
+  Grid <- make_clade_corr_grid(Clades = Clades,
+                               n = n,
+                               diagonal = TRUE,
+                               ncores = ncores)
   K <- length(Clades)
   M <- matrix(0, ncol = K, nrow = K)
   for(k in 1:nrow(Grid)){
@@ -103,6 +112,7 @@ make_clade_cov_mat <- function(Clades, n){
 #'
 #' @param Clades a character vector with all clades to be included.
 #' @param n number of taxa.
+#' @param ncores number of cores to be used.
 #'
 #' @return a  K x  K correlation matrix.
 #' @export  make_clade_corr_mat
@@ -110,8 +120,10 @@ make_clade_cov_mat <- function(Clades, n){
 #' @examples
 #' clades.n4 <- make_all_clades(4)
 #' make_clade_corr_mat(Clades = clades.n4, n = 4)
-make_clade_corr_mat <- function(Clades, n){
-  Grid <- make_clade_corr_grid(Clades = Clades, n = n)
+make_clade_corr_mat <- function(Clades, n, ncores = 2){
+  Grid <- make_clade_corr_grid(Clades = Clades,
+                               n = n,
+                               ncores = ncores)
   K <- length(Clades)
   M <- matrix(0, ncol = K, nrow = K)
   for(k in 1:nrow(Grid)) M [Grid[k, ]$i, Grid[k, ]$j] <- Grid[k, ]$rho

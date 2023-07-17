@@ -4,12 +4,14 @@
 \alias{make_clade_corr_mat}
 \title{Build the correlation matrix for a list of K clades on \code{n} taxa.}
 \usage{
-make_clade_corr_mat(Clades, n)
+make_clade_corr_mat(Clades, n, ncores = 2)
 }
 \arguments{
 \item{Clades}{a character vector with all clades to be included.}
 
 \item{n}{number of taxa.}
+
+\item{ncores}{number of cores to be used.}
 }
 \value{
 a  K x  K correlation matrix.

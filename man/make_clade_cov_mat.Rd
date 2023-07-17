@@ -4,12 +4,14 @@
 \alias{make_clade_cov_mat}
 \title{Build the variance-covariance matrix for a list of K clades on \code{n} taxa.}
 \usage{
-make_clade_cov_mat(Clades, n)
+make_clade_cov_mat(Clades, n, ncores = 2)
 }
 \arguments{
 \item{Clades}{a character vector with all K clades to be included.}
 
 \item{n}{number of taxa}
+
+\item{ncores}{number of cores to be used.}
 }
 \value{
 a K x K matrix of covariances.
